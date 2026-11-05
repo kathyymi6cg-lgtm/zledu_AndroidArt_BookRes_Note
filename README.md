@@ -1,5 +1,10 @@
 # Android 开发艺术探索
 
+## 源码学习 Skill
+
+- [Android 源码与面试技术学习：安装和使用](skills/README.md)
+- [Skill 指令](skills/android-source-learning/SKILL.md)：围绕真实代码补齐语法、Android 原理和框架技术，积累学习笔记。
+
 ## 文档目录
 
 - [封面](Android开发艺术探索_书前内容/封面.md)

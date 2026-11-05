@@ -1,0 +1,4 @@
+interface:
+  display_name: "Android 源码学习教练"
+  short_description: "从源码补齐语法、Android 原理和框架机制，积累能讲清楚的面试知识"
+  default_prompt: "使用 $android-source-learning 带我读当前 Android 项目的一小段源码，补齐基础、解释技术原理并整理面试表达。"

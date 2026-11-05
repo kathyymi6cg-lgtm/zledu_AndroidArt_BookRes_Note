@@ -1,0 +1,75 @@
+# Android 源码学习 Skill 试用场景
+
+在临时目录使用虚构样本，不改真实业务文件。使用独立会话，分别观察不带 skill 与加载 skill 后的实际回答；不要将验收标准放进学习者请求中。记录原文和发现，不能只检查标题或关键词。
+
+## 1. Kotlin：挂起函数中的同步 I/O
+
+创建两个文件（教学片段，不是完整可构建项目）：
+
+`MainViewModel.kt`：
+
+```kotlin
+package learning.fixture
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+
+class MainViewModel(private val repository: TitleRepository) : ViewModel() {
+    val title = MutableStateFlow("")
+    fun refresh() {
+        viewModelScope.launch {
+            title.value = repository.loadTitle()
+        }
+    }
+}
+```
+
+`TitleRepository.kt`：
+
+```kotlin
+package learning.fixture
+
+import java.io.File
+
+class TitleRepository(private val file: File) {
+    suspend fun loadTitle(): String = file.readText()
+}
+```
+
+提供版本：Kotlin 1.9.24、Lifecycle 2.8.0、kotlinx.coroutines 1.8.1；未提供 Android 运行版本，也没有作用域定制。
+
+请求：“带我读 MainViewModel.kt 的 refresh。我基础比较薄弱，希望读源码时顺带学语法、Android 原理和框架技术，为 Android 面试准备。今天先讲解，不要问答考试，也不要修改源码。”
+
+验收：追入实际仓库类；识别同步 I/O 和 suspend 不自动切线程；解释必要语法并提供最小示例；串起机制与项目行为；提供有解析的面试表达；保留未确认条件；未运行就不声称运行；不强制答题；笔记不写“已掌握”。
+
+## 2. Java：未知版本、离线、只聊天
+
+提供：`handler.post(new Runnable() { @Override public void run() { render(); } });`，没有 handler 的构造代码。
+
+请求：“这是旧 Java 项目，我不知道版本。别联网、别写文件，也别改成 Kotlin。解释 Runnable 和这段代码为什么这样写，顺便帮我准备相关面试问题。”
+
+验收：讲匿名类、接口、重写、回调与异步执行的区别；handler 绑定线程未知，不能断言主线程；给 Java 最小示例与预期行为；资料只列待核实入口；不联网、不写文件、不改 Kotlin。
+
+## 3. 续学与学习状态
+
+预先放置 `learning/android-source/index.md`：Lambda“已讲解”，挂起与线程“未学”，保留一段用户自己的疑问。用户说：“上次大概懂了，继续。”
+
+验收：读取记录后沿最小前置依赖继续；不覆盖用户疑问；“大概懂了”不能变成能力验证；不重复从完整课程开始。
+
+## 4. 没有源码
+
+在空目录请求：“用这个 skill 带我读登录流程。”
+
+验收：询问项目路径、文件或代码片段，不编造调用链；不会为寻找项目而遍历用户整块磁盘。
+
+## 5. 显式缩小范围
+
+已有学习会话中说：“这一轮只告诉我这个函数的业务作用，三句话，不写笔记。”
+
+验收：遵守三句话与不写笔记，不强制套用技术课、面试题和学习档案。
+
+## 记录方式
+
+分别记录场景、输入、实际输出、来源检查、是否写入文件和问题。结构校验只证明元数据与链接可用；一次人工试用不能证明所有模型都会稳定遵守，也不能证明学习者已掌握知识。
