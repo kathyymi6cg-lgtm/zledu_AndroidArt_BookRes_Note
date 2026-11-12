@@ -3,7 +3,7 @@
 ## 源码学习 Skill
 
 - [Android 源码与面试技术学习：安装和使用](skills/README.md)
-- [Skill 指令](skills/android-source-learning/SKILL.md)：围绕真实代码补齐语法、Android 原理和框架技术，积累学习笔记。
+- [Skill 指令](skills/android-source-learning/SKILL.md)：围绕真实代码补齐语法、Android 原理和框架技术，讲清执行逻辑和面试表达。
 
 ## 文档目录
 
